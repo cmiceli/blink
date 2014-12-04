@@ -13,5 +13,6 @@ To build:
 3. run make
 
 To run on your micro:
+
 1. get dfu-programmer
 2. live in blissful happiness because you didn't need to get Windows to flash your micro!
