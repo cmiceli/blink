@@ -1,24 +1,22 @@
 PRG=blink
 OBJ=$(PRG).o
+HEX=$(PRG).hex
 CFILES=$(PRG).c
+AVR_LOC=/home/chris/micro/avr/avr/include/
 HEADERS=
 
-MCU_TARGET=atmega256a3bu
+MCU_TARGET=atxmega256a3bu
 CC=avr-gcc
 OPTIMISE=-O2
 LIBS=
 CCFLAGS=-Wall -mmcu=$(MCU_TARGET) -g $(OPTIMISE)
-LDFLAGS=-Wl
+LDFLAGS=
 OBJCOPY=avr-objcopy
 
-all: $(PRG).elf
-
-hex:  $(PRG).hex
+all: $(HEX)
 
 $(OBJ): $(CFILES) $(HEADERS)
+		$(CC) $(CCFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
 
-$(PRG).elf: $(OBJ)
-		$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
-
-%.hex: %.elf
+%.hex: %.o
 		$(OBJCOPY) -j .text -j .data -O ihex $< $@
